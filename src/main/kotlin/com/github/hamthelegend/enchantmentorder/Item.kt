@@ -15,8 +15,18 @@ data class Item(
 fun makeItemWithMaxEnchantments(type: ItemType, enchantmentTypes: List<EnchantmentType>, anvilUseCount: Int) =
     Item(type, enchantmentTypes.map { max(it) }, anvilUseCount)
 
-enum class ItemType(val compatibleEnchantmentTypes: Set<EnchantmentType>) {
-    ENCHANTED_BOOK(EnchantmentType.values().toSet()),
+enum class ItemCategory {
+    ENCHANTED_BOOK, WEARABLE, TOOL;
+
+    val friendlyName: String
+        get() = name.toTitleCase('_')
+}
+
+enum class ItemType(
+    val compatibleEnchantmentTypes: Set<EnchantmentType>,
+    val itemCategory: ItemCategory,
+) {
+    ENCHANTED_BOOK(EnchantmentType.values().toSet(), ItemCategory.ENCHANTED_BOOK),
     HELMET(setOf(
         AQUA_AFFINITY,
         BLAST_PROTECTION,
@@ -28,7 +38,9 @@ enum class ItemType(val compatibleEnchantmentTypes: Set<EnchantmentType>) {
         RESPIRATION,
         THORNS,
         UNBREAKING,
-    )),
+    ),
+        ItemCategory.WEARABLE
+    ),
     CHESTPLATE(setOf(
         BLAST_PROTECTION,
         CURSE_OF_BINDING,
@@ -39,7 +51,9 @@ enum class ItemType(val compatibleEnchantmentTypes: Set<EnchantmentType>) {
         PROTECTION,
         THORNS,
         UNBREAKING,
-    )),
+    ),
+        ItemCategory.WEARABLE
+    ),
     LEGGINGS(setOf(
         BLAST_PROTECTION,
         CURSE_OF_BINDING,
@@ -50,7 +64,9 @@ enum class ItemType(val compatibleEnchantmentTypes: Set<EnchantmentType>) {
         PROTECTION,
         THORNS,
         UNBREAKING,
-    )),
+    ),
+        ItemCategory.WEARABLE
+    ),
     BOOTS(setOf(BLAST_PROTECTION,
         CURSE_OF_BINDING,
         CURSE_OF_VANISHING,
@@ -64,17 +80,23 @@ enum class ItemType(val compatibleEnchantmentTypes: Set<EnchantmentType>) {
         SOUL_SPEED,
         THORNS,
         UNBREAKING
-    )),
+    ),
+        ItemCategory.WEARABLE
+    ),
     ELYTRA(setOf(
         CURSE_OF_BINDING,
         CURSE_OF_VANISHING,
         MENDING,
         UNBREAKING
-    )),
+    ),
+        ItemCategory.WEARABLE
+    ),
     HEAD(setOf(
         CURSE_OF_BINDING,
         CURSE_OF_VANISHING,
-    )),
+    ),
+        ItemCategory.WEARABLE
+    ),
     SWORD(setOf(
         BANE_OF_ARTHROPODS,
         CURSE_OF_VANISHING,
@@ -86,7 +108,9 @@ enum class ItemType(val compatibleEnchantmentTypes: Set<EnchantmentType>) {
         SMITE,
         SWEEPING_EDGE,
         UNBREAKING,
-    )),
+    ),
+        ItemCategory.TOOL
+    ),
     AXE(setOf(
         BANE_OF_ARTHROPODS,
         CURSE_OF_VANISHING,
@@ -97,7 +121,9 @@ enum class ItemType(val compatibleEnchantmentTypes: Set<EnchantmentType>) {
         SILK_TOUCH,
         SMITE,
         UNBREAKING,
-    )),
+    ),
+        ItemCategory.TOOL
+    ),
     PICKAXE(setOf(
         CURSE_OF_VANISHING,
         EFFICIENCY,
@@ -105,7 +131,9 @@ enum class ItemType(val compatibleEnchantmentTypes: Set<EnchantmentType>) {
         MENDING,
         SILK_TOUCH,
         UNBREAKING,
-    )),
+    ),
+        ItemCategory.TOOL
+    ),
     SHOVEL(setOf(
         CURSE_OF_VANISHING,
         EFFICIENCY,
@@ -113,7 +141,9 @@ enum class ItemType(val compatibleEnchantmentTypes: Set<EnchantmentType>) {
         MENDING,
         SILK_TOUCH,
         UNBREAKING,
-    )),
+    ),
+        ItemCategory.TOOL
+    ),
     HOE(setOf(
         CURSE_OF_VANISHING,
         EFFICIENCY,
@@ -121,7 +151,9 @@ enum class ItemType(val compatibleEnchantmentTypes: Set<EnchantmentType>) {
         MENDING,
         SILK_TOUCH,
         UNBREAKING,
-    )),
+    ),
+        ItemCategory.TOOL
+    ),
     BOW(setOf(
         CURSE_OF_VANISHING,
         FLAME,
@@ -130,14 +162,18 @@ enum class ItemType(val compatibleEnchantmentTypes: Set<EnchantmentType>) {
         POWER,
         PUNCH,
         UNBREAKING,
-    )),
+    ),
+        ItemCategory.TOOL
+    ),
     FISHING_ROD(setOf(
         CURSE_OF_VANISHING,
         LUCK_OF_THE_SEA,
         LURE,
         MENDING,
         UNBREAKING,
-    )),
+    ),
+        ItemCategory.TOOL
+    ),
     TRIDENT(setOf(
         CHANNELING,
         CURSE_OF_VANISHING,
@@ -146,7 +182,9 @@ enum class ItemType(val compatibleEnchantmentTypes: Set<EnchantmentType>) {
         MENDING,
         RIPTIDE,
         UNBREAKING,
-    )),
+    ),
+        ItemCategory.TOOL
+    ),
     CROSSBOW(setOf(
         CURSE_OF_VANISHING,
         MENDING,
@@ -154,28 +192,38 @@ enum class ItemType(val compatibleEnchantmentTypes: Set<EnchantmentType>) {
         PIERCING,
         QUICK_CHARGE,
         UNBREAKING,
-    )),
+    ),
+        ItemCategory.TOOL
+    ),
     SHEARS(setOf(
         CURSE_OF_VANISHING,
         EFFICIENCY,
         MENDING,
         UNBREAKING
-    )),
+    ),
+        ItemCategory.TOOL
+    ),
     FLINT_AND_STEEL(setOf(
         CURSE_OF_VANISHING,
         MENDING,
         UNBREAKING
-    )),
+    ),
+        ItemCategory.TOOL
+    ),
     CARROT_ON_A_STICK(setOf(
         CURSE_OF_VANISHING,
         MENDING,
         UNBREAKING
-    )),
+    ),
+        ItemCategory.TOOL
+    ),
     WARPED_FUNGUS_ON_A_STICK(setOf(
         CURSE_OF_VANISHING,
         MENDING,
         UNBREAKING
-    )),
+    ),
+        ItemCategory.TOOL
+    ),
     ;
 
     val friendlyName: String
