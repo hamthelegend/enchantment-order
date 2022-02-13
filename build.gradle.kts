@@ -6,8 +6,12 @@ plugins {
     `maven-publish`
 }
 
-group = "com.github.hamthelegend"
-version = "0.6"
+val groupId = "com.github.hamthelegend"
+val artifactId = "enchantment-order"
+val versionId = "0.7"
+
+group = groupId
+version = versionId
 
 repositories {
     mavenCentral()
@@ -32,9 +36,9 @@ application {
 publishing {
     publications {
         create<MavenPublication>("maven") {
-            groupId = "com.github.hamthelegend"
-            artifactId = "enchantment-order"
-            version = "0.5"
+            groupId = groupId
+            artifactId = artifactId
+            version = versionId
 
             from(components["java"])
         }
