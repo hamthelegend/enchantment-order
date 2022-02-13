@@ -7,7 +7,7 @@ plugins {
 }
 
 group = "com.github.hamthelegend"
-version = "0.5"
+version = "0.6"
 
 repositories {
     mavenCentral()

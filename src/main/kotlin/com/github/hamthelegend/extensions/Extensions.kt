@@ -57,12 +57,13 @@ fun Int.toRomanNumerals(): String {
 }
 
 fun String.toTitleCase(wordSeparator: Char): String {
-    val uncapitalizedWords = setOf("a", "an", "the", "of", "on")
+    val uncapitalizedWords = setOf("a", "an", "and", "the", "of", "on")
     val words = split(wordSeparator)
     val titleBuilder = StringBuilder()
-    for (word in words.map { it.lowercase() }) {
+    for ((index, word) in words.map { it.lowercase() }.withIndex()) {
         if (word in uncapitalizedWords) titleBuilder.append(word)
         else titleBuilder.append(word.replaceFirstChar { it.uppercase() })
+        if (index != words.lastIndex) titleBuilder.append(' ')
     }
     return titleBuilder.toString()
 }
