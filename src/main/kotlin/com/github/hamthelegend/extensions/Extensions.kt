@@ -68,17 +68,6 @@ fun String.toTitleCase(wordSeparator: Char): String {
     return titleBuilder.toString()
 }
 
-infix fun <T> List<T>.alternate(other: List<T>): MutableList<T> {
-    val first = iterator()
-    val second = other.iterator()
-    val list = mutableListOf<T>()
-    while (first.hasNext() && second.hasNext()) {
-        list.add(first.next())
-        list.add(second.next())
-    }
-    return list
-}
-
 fun Int.pow(n: Int) = toDouble().pow(n).toInt()
 
 /**
